@@ -1,0 +1,18 @@
+syntax="proto3";
+package com.blackyaga.streaming.grpc.interfaces;
+
+option java_multiple_files=true;
+option java_package="com.blackyaga.streaming.grpc.interfaces";
+option java_outer_classname="SchemaProto";
+
+message Data{
+  string timestamp=1;
+  string message=2;
+}
+message Empty{
+}
+service StreamingService{
+  rpc serverSideStreaming(Empty)returns(stream Data){}
+  rpc clientSideStreaming(stream Data)returns(Empty){}
+  rpc bidirectional(stream Data)returns(Data){}
+}
